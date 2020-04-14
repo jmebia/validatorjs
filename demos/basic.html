@@ -1,28 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
         <!-- bootstrap css -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     </head>
 <body>
 
-<h1>Basic Usage</h1>
-
-<form>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted required">We'll never share your email with anyone else.</small>
+    <div class="p-2">
+        <h1>ValidatorJS</h1>
+        <p>
+            A simple client-side HTML form validation handler. Validator.js utilizes bootstrap for the styling of fields, for now.
+        </p>
+        
+        <h3>Basic Usage</h3>
+        <p>
+            <b>IMPORTANT!</b> Make sure Bootstrap is included in your project before using this. You can get it from https://getbootstrap.com/
+        </p>
     </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password required" class="form-control" id="exampleInputPassword1" placeholder="Password">
+
+<div class="card m-3" style="max-width: 500px;">
+    <div class="card-header">
+        Required Fields Validation
+    </div>
+    <div class="card-body p-2">
+        <div class="text-muted small my-2">Try focusing out of a required field after entering no value.</div>
+
+        <form>
+            <div class="form-group">
+                <label>First Name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control required" id="sampleRequiredInput1" placeholder="Enter first name">
+            </div>
+    
+            <div class="form-group">
+                <label>Middle Name</label>
+                <input type="text" class="form-control" id="sampleRequiredInput2" placeholder="Enter middle name (optional)">
+            </div>
+            
+            <div class="form-group">
+                <label>Last Name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control required" id="sampleRequiredInput3" placeholder="Enter last name">
+            </div>
+
+            <span class="text-danger validator-message"></span>
+    
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
     
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+</div>
 
-<!-- bootstrap js files -->
+<!-- bootstrap required js files -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -32,7 +63,11 @@
 
 <script>
     var validator = new Validator();
-
+    
+    $(".btn-primary").click(function() {
+        validator.checkValidations();
+        return false;
+    });
 
 </script>
 </body>
