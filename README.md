@@ -23,3 +23,4 @@ A simple client-side HTML form validation handler. *Validator.js* still needs bo
     validator.checkValidations(); // returns true if all required fields are filled
 </script>
 ```
+#### Visit https://jmebia.github.io/validatorjs/ for the complete documentation.
