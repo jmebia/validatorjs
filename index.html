@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- bootstrap css -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+<body class="px-5 pt-4 pb-3">
+
+
+    <h1>ValidatorJS</h1>
+    <p>
+        A simple client-side HTML form validation handler. ValidatorJS utilizes bootstrap for the styling of fields, <em>for now</em>.
+    </p>
+    <b>Currently handled validations:</b>
+    <ul>
+        <li>Required Fields</li>
+        <li>Email formats</li>
+        <li>Currency format</li>
+    </ul>
+    <a href="https://github.com/jmebia/validatorjs" target="_blank" class="btn btn-primary">Get ValidatorJS on GitHub</a>
+
+    <hr>
+    <h3>Prerequisite</h3>
+    <p>
+        <b>This is IMPORTANT!</b> Make sure Bootstrap is included in your project before using this, since this utilizes Bootstrap classes to stylize the fields upon validation. You can get the css and required js files from 
+        <a href="https://getbootstrap.com/" target="_blank">Bootsrap's website</a>.
+    </p>
+
+    <h3>How to use</h3>
+
+    <h5>Initializing ValidatorJS</h5>
+    <p>
+    In your script, instantiate ValidatorJS using the <code>new Validator()</code> constructor. Along with the instantiated validator object, the required fields checker, generic email checker, and currency format checker will be initialized.
+    </p>
+    <pre class="bg-light">
+        <code>
+            // this constructor will initialize checkers for the required, currency, and generic email fields
+            var validator = new Validator();
+
+            // If you are going to add the validator classes dynamically, re-initialize the checkers AFTER you add the class
+            validator.initRequired(); // re-initialize required fields checker if you will dynamically add 'required' classes
+            validator.initCurrencies(); // re-initialize currency fields checker if you will dynamically add 'validate-email' classes
+            validator.initEmails(); // re-initialize email fields checker if you will dynamically add 'validate-currency' classes
+        </code>
+    </pre>
+    <p>
+        Always remember to re-run the initializer functions (<code>v.initRequired()</code>, <code>v.initCurrencies()</code>, and <code>v.initEmails()</code>) for a specific validation every <em>AFTER</em> you add the validation classes dynamically.
+    </p>
+    
+    <h5>Required Fields</h5>
+    <p>
+        Input fields with the <code>required</code> class will be validated for empty values:
+    </p>
+    <pre class="bg-light">
+        <code>
+            &lt;input class="required"&gt;
+        </code>
+    </pre>
+    <p>
+        This will also work on <code>&lt;select&gt;</code> fields as long as you have an <code>&lt;option&gt;</code> with an <em>null/empty string</em> value. See the snippet below for example:
+    </p>
+    <pre class="bg-light">
+        <code>
+            &lt;select class="required"&gt;
+                &lt;option value=""&gt;Please select an option&lt;/option&gt;
+                &lt;option value="1"&gt;Option 1&lt;/option&gt;
+                &lt;option value="2"&gt;Option 2&lt;/option&gt;
+            &lt;/select&gt;
+
+        </code>
+    </pre>
+    <h5>Emails</h5>
+    <p>
+        To validate general emails, add a <code>validate-email</code> to your input field:
+    </p>
+    <pre class="bg-light">
+        <code>
+            &lt;input type="email" class="validate-email"&gt;
+        </code>
+    </pre>
+    <p>
+        If you are using <b>custom emails adresses</b> such as <i>_@johndoe.net</i> or <i>_@mycorporation.io</i>, you can use the <code>validate-custom-email</code> class:
+    </p>
+    <pre class="bg-light">
+        <code>
+            &lt;input type="email" class="validate-custom-email"&gt;
+        </code>
+    </pre>
+    <p>
+        However, you should also set your custom email and initialize the customEmails validator in your script for this to work:
+    </p>
+    <pre class="bg-light">
+        <code lang="jquery">
+            var validator.customEmail = @your-custom-email.com;
+            
+            // initialize custom emails checker AFTER setting your custom email
+            validator.initCustomEmails();
+        </code>
+    </pre>
+    <h5>Currency</h5>
+    <p>
+        Input fields with the <code>validate-currency</code> class will be checked if the input value is a float with 2 decimal places. The currency checker will also update the value to its proper format if it is a valid numerical input, be it integer or float.
+    </p>
+    <pre class="bg-light">
+        <code>
+            &lt;input class="validate-currency"&gt;
+        </code>
+    </pre>
+    <h5>Validation Messages</h5>
+    <p>
+        Validation messages are automatically appended below your input field upon validation! Isn't that neat? However, if you want a general validation message for your form after pressing the submit button, you can add a <code>validator-message</code> class to a <code>&lt;span&gt;</code> or a <code>&lt;div&gt;</code> preferably placed below your form, just right above the submit button.
+
+    </p>
+    <hr>
+    <h3>Example Form</h3>
+    <p>
+        Here is an example form using ValidatorJS so you can see it in action! Try focusing in then out of a required field, or pressing the submit button without entering any inputs.
+    </p>
+    <div class="card" style="max-width: 500px;">
+        <div class="card-header">
+            <div class="text-muted small my-2">Fields with a red asterisk (<span class="text-danger">*</span>) are required fields.</div>
+        </div>
+        <div class="card-body p-2">
+            
+            <form>
+                <div class="form-group">
+                    <label>Name<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control required" id="sampleNameInput" placeholder="Enter first name">
+                </div>
+
+                <div class="form-group">
+                    <label>Email<span class="text-danger">*</span></label>
+                    <input type="email" class="form-control required validate-email" id="sampleEmailInput1" placeholder="Enter Email">
+                </div>
+                <div class="form-group">
+                    <label>Custom Email<span class="text-danger"></span></label>
+                    <input type="text" class="form-control validate-custom-email" id="sampleEmailInput2" placeholder="Enter Email (@customMail.com)">
+                </div>
+
+                <div class="form-group">
+                    <label>Amount Spent<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control required validate-currency" id="sampleAmountInput" placeholder="Enter Amount">
+                </div>
+                
+                <span class="text-danger validator-message"></span>
+                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="pt-5 pb-5 text-center">
+        <a href="https://github.com/jmebia/validatorjs" target="_blank"><em>jmebia/validatorjs</em></a> is licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank"><b>MIT License</b></a>
+    </footer>
+<!-- bootstrap required js files -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<!-- validator js -->
+<script src="js/validator.js"></script>
+
+<script>
+    // instantiate validator
+    var validator = new Validator();
+    // instantiating the validator will also initialize the auto-checkers for other fields
+    // such as the required fields
+
+    // set custom email address to validate
+    validator.customEmail = "@customMail.com"; // always start with an '@' character
+
+    // initialize custom emails fields checker AFTER setting the custom email
+    validator.initCustomEmails();
+
+    // check if custom email is set, this should return your custom email
+    console.log('Custom email', validator.customEmail);
+
+    // on clicking the submit button
+    $("#submit").click(function() {
+        // run the general validations checker, this will return a boolean value
+        // this function will also update your html element with the 'validator-message' class
+        var isFormValid = validator.checkValidations();
+        
+        return isFormValid;
+    });
+
+</script>
+</body>
+</html>

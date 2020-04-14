@@ -23,8 +23,3 @@ A simple client-side HTML form validation handler. *Validator.js* still needs bo
     validator.checkValidations(); // returns true if all required fields are filled
 </script>
 ```
-
-### Features (Version 0.1.0)
-- Focusing out of "required" fields will give a warning.
-- Validation function for all required fields that can be used before sending your post requests.
-- Custom email validation.
