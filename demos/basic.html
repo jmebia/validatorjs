@@ -8,50 +8,52 @@
         <!-- bootstrap css -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     </head>
-<body>
+<body class="px-5 pt-4 pb-3">
 
-    <div class="p-2">
-        <h1>ValidatorJS</h1>
-        <p>
-            A simple client-side HTML form validation handler. Validator.js utilizes bootstrap for the styling of fields, for now.
-        </p>
+
+    <h1>ValidatorJS</h1>
+    <p>
+        A simple client-side HTML form validation handler. ValidatorJS utilizes bootstrap for the styling of fields, for now.
+    </p>
         
-        <h3>Basic Usage</h3>
-        <p>
-            <b>IMPORTANT!</b> Make sure Bootstrap is included in your project before using this. You can get it from https://getbootstrap.com/
-        </p>
-    </div>
+    <h3>Prerequisite</h3>
+    <p>
+        <b>This is IMPORTANT!</b> Make sure Bootstrap is included in your project before using this. You can get the css and required js files from 
+        <a href="https://getbootstrap.com/" target="_blank">Bootsrap's website</a>.
+    </p>
 
-<div class="card m-3" style="max-width: 500px;">
-    <div class="card-header">
-        Required Fields Validation
-    </div>
-    <div class="card-body p-2">
-        <div class="text-muted small my-2">Try focusing out of a required field after entering no value.</div>
+    <h3>How to use</h3>
+    <div class="card" style="max-width: 500px;">
+        <div class="card-header">
+            Sample Form using ValidatorJS
+        </div>
+        <div class="card-body p-2">
+            <div class="text-muted small my-2">Try focusing out of a required field after entering no value.</div>
+            <form>
+                <div class="form-group">
+                    <label>Name<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control required" id="sampleNameInput" placeholder="Enter first name">
+                </div>
 
-        <form>
-            <div class="form-group">
-                <label>First Name<span class="text-danger">*</span></label>
-                <input type="text" class="form-control required" id="sampleRequiredInput1" placeholder="Enter first name">
-            </div>
-    
-            <div class="form-group">
-                <label>Middle Name</label>
-                <input type="text" class="form-control" id="sampleRequiredInput2" placeholder="Enter middle name (optional)">
-            </div>
-            
-            <div class="form-group">
-                <label>Last Name<span class="text-danger">*</span></label>
-                <input type="text" class="form-control required" id="sampleRequiredInput3" placeholder="Enter last name">
-            </div>
+                <div class="form-group">
+                    <label>Email<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control required validate-email" id="sampleEmailInput1" placeholder="Enter Email">
+                </div>
+                <div class="form-group">
+                    <label>Custom Email<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control validate-custom-email" id="sampleEmailInput2" placeholder="Enter Email (@customMail.com)">
+                </div>
 
-            <span class="text-danger validator-message"></span>
-    
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+                <div class="form-group">
+                    <label>Amount Spent<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control required validate-currency" id="sampleAmountInput" placeholder="Enter Amount">
+                </div>
+                
+                <span class="text-danger validator-message"></span>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </div>
-    
-</div>
 
 <!-- bootstrap required js files -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -62,11 +64,27 @@
 <script src="../js/validator.js"></script>
 
 <script>
+    // instantiate validator
     var validator = new Validator();
-    
+    // instantiating the validator will also initialize the auto-checkers for other fields
+    // such as the required fields
+
+    // set custom email to validate
+    validator.customEmail = "@customMail.com";
+
+    // initialize custom emails fields checker AFTER setting the custom email
+    validator.initCustomEmails();
+
+    // check if custom email is set, this should return your custom email
+    console.log('Custom email', validator.customEmail);
+
+    // on clicking the submit button
     $(".btn-primary").click(function() {
-        validator.checkValidations();
-        return false;
+        // run the general validations checker, this will return a boolean value
+        // this function will also update your html element with the 'validator-message' class
+        var isFormValid = validator.checkValidations();
+        
+        return isFormValid;
     });
 
 </script>
