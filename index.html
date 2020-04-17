@@ -26,6 +26,9 @@
     <hr>
     <h3>Prerequisite</h3>
     <p>
+        Download 
+    </p>
+    <p>
         <b>This is IMPORTANT!</b> Make sure Bootstrap is included in your project before using this, since this utilizes Bootstrap classes to stylize the fields upon validation. You can get the css and required js files from 
         <a href="https://getbootstrap.com/" target="_blank">Bootsrap's website</a>.
     </p>
@@ -53,7 +56,7 @@
     
     <h5>Required Fields</h5>
     <p>
-        Input fields with the <code>required</code> class will be validated for empty values:
+        Input fields with the <code>.required</code> class will be validated for empty values:
     </p>
     <pre class="bg-light">
         <code>
@@ -83,7 +86,7 @@
         </code>
     </pre>
     <p>
-        If you are using <b>custom emails adresses</b> such as <i>_@johndoe.net</i> or <i>_@mycorporation.io</i>, you can use the <code>validate-custom-email</code> class:
+        If you are using <b>custom emails adresses</b> such as <i>_@johndoe.net</i> or <i>_@mycorporation.io</i>, you can use the <code>.validate-custom-email</code> class:
     </p>
     <pre class="bg-light">
         <code>
@@ -95,7 +98,7 @@
     </p>
     <pre class="bg-light">
         <code lang="jquery">
-            var validator.customEmail = @your-custom-email.com;
+            var validator.customEmail = "@your-custom-email.com";
             
             // initialize custom emails checker AFTER setting your custom email
             validator.initCustomEmails();
@@ -103,7 +106,7 @@
     </pre>
     <h5>Currency</h5>
     <p>
-        Input fields with the <code>validate-currency</code> class will be checked if the input value is a float with 2 decimal places. The currency checker will also update the value to its proper format if it is a valid numerical input, be it integer or float.
+        Input fields with the <code>.validate-currency</code> class will be checked if the input value is a float with 2 decimal places. The currency checker will also update the value to its proper format if it is a valid numerical input, be it integer or float.
     </p>
     <pre class="bg-light">
         <code>
@@ -112,7 +115,7 @@
     </pre>
     <h5>Validation Messages</h5>
     <p>
-        Validation messages are automatically appended below your input field upon validation! Isn't that neat? However, if you want a general validation message for your form after pressing the submit button, you can add a <code>validator-message</code> class to a <code>&lt;span&gt;</code> or a <code>&lt;div&gt;</code> preferably placed below your form, just right above the submit button.
+        Validation messages are automatically appended below your input field upon validation! Isn't that neat? However, if you want a general validation message for your form after pressing the submit button, you can add a <code>.validator-message</code> class to a <code>&lt;span&gt;</code> or a <code>&lt;div&gt;</code> preferably placed below your form, just right above the submit button.
 
     </p>
     <hr>
